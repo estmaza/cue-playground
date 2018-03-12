@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Hello Vue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{ message }}
+  </div>
+
+  <div id="app-2">
+    <span v-bind:title="message">
+      Наведи курсор на меня пару секунд, чтобы увидеть динамически связанное значение title!
+    </span>
+  </div>
+
+  <div id="app-3">
+    <button v-on:click="seen = !seen">
+      Переключить
+    </button>
+    <transition name="fade">
+      <span v-if="seen">Сейчас меня видно</span>
+    </transition>
+  </div>
+
+  <div id="app-4">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+
+
+  <div id="app-7">
+    <ol>
+      <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id">
+      </todo-item>
+    </ol>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Привет, Vue!'
+      }
+    })
+
+    var app2 = new Vue({
+      el: '#app-2',
+      data: {
+        message: 'Вы загрузили эту страницу в: ' + new Date().toLocaleString()
+      }
+    })
+
+    var app3 = new Vue({
+      el: '#app-3',
+      data: {
+        seen: true
+      }
+    })
+
+    var app4 = new Vue({
+      el: '#app-4',
+      data: {
+        todos: [
+          { text: 'Изучить JavaScript' },
+          { text: 'Изучить Vue' },
+          { text: 'Создать что-нибудь классное' }
+        ]
+      }
+    })
+
+    Vue.component('todo-item', {
+      props: ['todo'],
+      template: '<li>{{ todo.text }}</li>'
+    })
+
+    var app7 = new Vue({
+      el: '#app-7',
+      data: {
+        groceryList: [
+          { id: 0, text: 'Овощи' },
+          { id: 1, text: 'Сыр' },
+          { id: 2, text: 'Что там ещё люди едят?' }
+        ]
+      }
+    })
+  </script>
+
+</body>
+
+</html>

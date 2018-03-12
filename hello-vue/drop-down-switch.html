@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Drop-down Switch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="dropdownswitch">
+    <select v-model="selectedType">
+      <option>select me</option>
+      <option v-for="option in typeOptions" v-bind:value="option.value">{{option.text}}</option>
+    </select>
+    <select v-model="selectedLabor">
+      <option>select me</option>
+      <option v-for="option in  laborOptions" v-bind:value="option.value">{{option.text}}</option>
+    </select>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#dropdownswitch',
+      data: {
+        selectedType: 1,
+        selectedLabor: 1,
+        typeOptions: [
+          { value: 1, text: 'first' },
+          { value: 2, text: 'second' }
+        ],
+        firstOptions: [
+          { value: 1, text: 'first 1' },
+          { value: 2, text: 'first 2' },
+          { value: 3, text: 'first 3' }
+        ],
+        secondOptions: [
+          { value: 1, text: 'second 1' },
+          { value: 2, text: 'second 2' },
+          { value: 3, text: 'second 3' }
+        ]
+      },
+      computed: {
+        laborOptions: function () {
+          return this.selectedType == 1 ? this.firstOptions : this.secondOptions;
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
